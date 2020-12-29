@@ -1,0 +1,46 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_binary(
+    name = "behemoth",
+    srcs = [
+        "src/behemoth/mainBehemoth.cpp"
+    ],
+    copts = [
+        "-std=c++17",
+        "-fconcepts",
+        "-Wfatal-errors",
+    ],
+    deps = [
+        "@solver_kp01_generic//:solver_kp01_generic_lib", # todo: repeat here?
+        "@solver_kp01_generic//:solver_kp01_generic", # todo: repeat here?
+        "@OptFrame//src:OptFCore",
+        "behemoth_hpp"
+    ],
+)
+
+# these are all important included files
+cc_library(
+    name = "behemoth_hpp",
+    hdrs = glob([
+        "src/behemoth/**/*.hpp",
+    ]),
+    strip_include_prefix = "src/",
+    deps = [
+        "@solver_kp01_generic//:solver_kp01_generic",
+        "@solver_kp01_generic//:solver_kp01_generic_lib",
+        "@OptFrame//src:OptFCore",
+    ],
+)
+
+# thirdparty json library
+cc_library(
+    name = "nlohmann",
+    hdrs = glob([
+        "libs/nlohmann/**/*.hpp",
+    ]),
+    strip_include_prefix = "libs/",
+)

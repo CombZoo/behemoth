@@ -1,0 +1,19 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load('@bazel_tools//tools/build_defs/repo:git.bzl', 'git_repository')
+
+#local_repository(
+#    name = "OptFrame",
+#    path = "../../"
+#)
+
+git_repository(
+    name='solver_kp01_generic',
+    remote='https://github.com/CombZoo/solver_kp01_generic.git',
+    branch='main'
+)
+
+git_repository(
+    name='OptFrame',
+    remote='https://github.com/optframe/optframe.git',
+    branch='master'
+)
